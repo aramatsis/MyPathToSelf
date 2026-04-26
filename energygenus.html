@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Энергия Рода — Мой путь к себе</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: url('images/background7.jpg') center/cover no-repeat;
+            color: #2b2a2a;
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #4a4a9e;
+            font-size: 2em;
+            margin: 40px 0 20px;
+        }
+
+        /* Сетка для карточек */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+            width: 100%;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .card .title {
+            padding: 10px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .card .description {
+            padding: 0 10px 10px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        /* Аудио проигрыватель */
+        .audio-player {
+            padding: 10px;
+        }
+
+        .audio-player audio {
+            width: 100%;
+        }
+
+        .download-btn {
+            margin-top: 10px;
+            padding: 6px 12px;
+            font-size: 0.85em;
+            color: #fff;
+            background-color: #a12cac;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background-color: #8a1f91;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Мой путь к себе</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="meditations.html">Медитации</a></li>
+                <li><a href="blog.html">Блог</a></li>
+                <li><a href="about.html">О сайте</a></li>
+            </ul>
+        </nav>
+        <div class="auth" id="auth-link">
+            <a href="login.html">Авторизация</a>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="section-title">Энергия Рода</h1>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; line-height: 1.7;">
+            Здесь вы найдёте аудиомедитации и текстовые материалы, посвящённые исцелению рода, работе с семейными программами и восстановлению энергетической связи с предками. Это Родовые молитвы! Молитвы глубокие, очищающие, исцеляющие, восстанавливающие энергию Рода. Они не имеют отношения к какой-то конкретной религии и подходят абсолютно всем!
+        </p>
+
+        <!-- Аудио записи -->
+        <h2 class="section-title">Медитации для подготовки</h2>
+        <div id="audio-grid" class="grid">
+            <!-- Аудио будут добавлены автоматически -->
+        </div>
+
+        <!-- Текстовые файлы -->
+        <h2 class="section-title">Десять Родовых прошений</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; line-height: 1.7;">
+          Читаем 10 дней, каждый день новая молитва! </p>
+
+        <div id="docs-grid" class="grid">
+            <!-- Документы будут добавлены автоматически -->
+        </div>
+    </main>
+
+    <footer>
+        <p><a href="index.html">Главная</a> | <a href="meditations.html">Медитации</a> | <a href="videos.html">Видео</a> | <a href="blog.html">Блог</a> | <a href="audio.html">Аудио</a> | <a href="literature.html">Литература</a> | <a href="energygenus.html">Энергия Рода</a> | <a href="about.html">О сайте</a> | <a href="contact.html">Контакты</a></p>
+        <p>Телефон: +7 (XXX) XXX-XX-XX | Email: info@mypath.ru | Мессенджер: MAX</p>
+        <p>&copy; 2026 Мой путь к себе. Все права защищены.</p>
+    </footer>
+
+    <!-- Подключаем общий скрипт -->
+    <script type="module" src="js/auth.js"></script>
+
+    <script>
+  // Список аудиозаписей
+  const audioList = [
+    {
+      title: "Молитва на защиту",
+      description: "Прослушать перед молитвой.",
+      src: "audio/energygenus1.ogg",
+      img: "images/energy1.jpeg",
+      download: "audio/energygenus1.mp3"
+    },
+    {
+      title: "Исцеление родовой боли",
+      description: "Работа с негативными программами прошлых поколений.",
+      src: "audio/energygenus2.mp3",
+      img: "images/energy2.jpg",
+      download: "audio/energygenus2.mp3"
+    },
+    {
+      title: "Родовая благодарность",
+      description: "Практика признания и благодарности роду.",
+      src: "audio/energygenus3.mp3",
+      img: "images/energy3.jpg",
+      download: "audio/energygenus3.mp3"
+    }
+  ];
+
+  // Список текстовых файлов (.pdf)
+    const docList = [
+    {
+    title: "Как читаются молитвы.",
+    description: "Какие ощущения могут быть.",
+    img: "images/doc0.jpeg",
+    file: "docs/procedure.pdf"
+    },
+  {
+    title: "Родовое Древо",
+    description: "Составьте Ваше Родовое Древо по данному примеру",
+    img: "images/doc.jpg",
+    file: "docs/familytree.pdf"
+  },
+  {
+    title: "О счастливом материнстве",
+    description: "Первый день.",
+    img: "images/doc1.jpeg",
+    file: "docs/rodoslovnaia1.pdf"
+  },
+  {
+    title: "На очищение рода",
+    description: "Второй день.",
+    img: "images/doc2.jpeg",
+    file: "docs/rodoslovnaia2.pdf"
+  },
+  {
+    title: "О процветании и благополучии рода",
+    description: "Третий день.",
+    img: "images/doc3.jpeg",
+    file: "docs/rodoslovnaia3.pdf"
+  },
+    {
+    title: "О женском счастье рода",
+    description: "Четвёртый день.",
+    img: "images/doc4.jpeg",
+    file: "docs/rodoslovnaia4.pdf"
+  },
+    {
+    title: "Созидающая роду",
+    description: "Пятый день.",
+    img: "images/doc5.jpeg",
+    file: "docs/rodoslovnaia5.pdf"
+  },
+];
+
+  // Загрузка аудио
+  function loadAudio() {
+    const container = document.getElementById('audio-grid');
+    if (!container) return;
+
+    audioList.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      card.innerHTML = `
+        <img src="${item.img}" alt="${item.title}">
+        <div class="title">${item.title}</div>
+        <div class="description">${item.description}</div>
+        <div class="audio-player">
+          <audio controls>
+            <source src="${item.src}" type="audio/mpeg">
+            Ваш браузер не поддерживает аудио.
+          </audio>
+          <button class="download-btn" onclick="window.open('${item.download}', '_blank')">Скачать</button>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // Загрузка документов
+    function loadDocs() {
+    const container = document.getElementById('docs-grid');
+    if (!container) return;
+
+    docList.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      card.innerHTML = `
+        <img src="${item.img}" alt="${item.title}" style="cursor: pointer;" onclick="openDoc('${item.file}')">
+        <div class="title">${item.title}</div>
+        <div class="description">${item.description}</div>
+        <button class="download-btn" onclick="window.open('${item.file}', '_blank')">Скачать</button>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // === Просмотр PDF документа онлайн (улучшенное модальное окно) ===
+function openDoc(fileUrl) {
+  const modal = document.createElement('div');
+  modal.style.cssText = `
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  `;
+
+  // Полный путь к файлу
+  const fullUrl = window.location.origin + '/' + fileUrl;
+
+  modal.innerHTML = `
+    <div style="
+      width: 90%;
+      max-width: 1000px;
+      height: 90%;
+      max-height: 800px;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    ">
+      <!-- Верхняя панель -->
+      <div style="
+        padding: 12px 16px;
+        background: #4a4a9e;
+        color: white;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      ">
+        <span>Просмотр документа</span>
+        <button id="close-modal" style="
+          background: none;
+          border: none;
+          color: white;
+          font-size: 1.4em;
+          cursor: pointer;
+          padding: 0;
+          width: 30px;
+          height: 30px;
+          line-height: 1;
+          text-align: center;
+        ">&times;</button>
+      </div>
+
+      <!-- Контент (PDF) -->
+      <div style="flex: 1; overflow: hidden;">
+        <embed
+          src="${fullUrl}#toolbar=1&zoom=85"
+          type="application/pdf"
+          width="100%"
+          height="100%"
+          style="border: none;"
+        >
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  // Анимация появления
+  setTimeout(() => {
+    modal.style.opacity = '1';
+    modal.querySelector('div').style.transform = 'scale(1)';
+  }, 10);
+
+  // Закрытие по кнопке
+  document.getElementById('close-modal').onclick = () => {
+    modal.style.opacity = '0';
+    modal.querySelector('div').style.transform = 'scale(0.9)';
+    setTimeout(() => {
+      document.body.removeChild(modal);
+    }, 300);
+  };
+
+  // Закрытие по клику на фон
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      modal.style.opacity = '0';
+      modal.querySelector('div').style.transform = 'scale(0.9)';
+      setTimeout(() => {
+        document.body.removeChild(modal);
+      }, 300);
+    }
+  };
+}
+
+  // Загружаем всё при готовности DOM
+  document.addEventListener('DOMContentLoaded', () => {
+    loadAudio();
+    loadDocs();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Литература — Мой путь к себе</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: url('images/background8.jpg') center/cover no-repeat;
+            color: #2b2a2a;
+        }
+        main {
+            margin-top: 80px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .books {
+            width: 100%;
+            max-width: 800px;
+            margin: 40px 0;
+        }
+        .book-item {
+            background: #fff;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            transition: transform 0.3s;
+        }
+        .book-item:hover {
+            transform: translateY(-5px);
+        }
+        .book-item img {
+            width: 120px;
+            height: 160px;
+            border-radius: 8px;
+            margin-right: 20px;
+            object-fit: cover;
+        }
+        .book-info {
+            flex: 1;
+        }
+        .book-info h3 {
+            margin-bottom: 10px;
+            color: #4a4a9e;
+        }
+        .book-info p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .download-link {
+            color: #4a9eff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .download-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Мой путь к себе</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="meditations.html">Медитации</a></li>
+                <li><a href="blog.html">Блог</a></li>
+                <li><a href="about.html">О сайте</a></li>
+            </ul>
+        </nav>
+        <div class="auth">
+            <a href="login.html">Авторизация</a>
+        </div>
+    </header>
+
+    <main>
+        <h1>Литература</h1>
+        <section class="books">
+            <div class="book-item">
+                <img src="https://source.unsplash.com/random/120x160/?book,spirituality" alt="Книга 1">
+                <div class="book-info">
+                    <h3>Путь внутрь. Дневник медитаций</h3>
+                    <p>Личный дневник автора, в котором она делится своими переживаниями, открытиями и духовными прозрениями за последние 5 лет. Подойдёт тем, кто только начинает свой путь.</p>
+                    <a href="books/path_within.pdf" class="download-link">Скачать PDF</a>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://source.unsplash.com/random/120x160/?book,meditation" alt="Книга 2">
+                <div class="book-info">
+                    <h3>Дыхание и свет. Практики осознанности</h3>
+                    <p>Пошаговые техники дыхания, медитации и визуализации, помогающие достичь состояния покоя и ясности ума. Включает упражнения для ежедневной практики.</p>
+                    <a href="books/breath_and_light.pdf" class="download-link">Скачать PDF</a>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="https://source.unsplash.com/random/120x160/?book,enlightenment" alt="Книга 3">
+                <div class="book-info">
+                    <h3>Единство. Размышления о Вселенной</h3>
+                    <p>Философские эссе о связи всех живых существ, о любви, сознании и божественной природе человека. Книга для глубокого размышления.</p>
+                    <a href="books/oneness.pdf" class="download-link">Скачать PDF</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><a href="index.html">Главная</a> | <a href="meditations.html">Медитации</a> | <a href="videos.html">Видео</a> | <a href="blog.html">Блог</a> | <a href="audio.html">Аудио</a> | <a href="literature.html">Литература</a> | <a href="energygenus.html">Энергия Рода</a> | <a href="about.html">О сайте</a> | <a href="contact.html">Контакты</a></p>
+        <p>Телефон: +7 (XXX) XXX-XX-XX | Email: info@mypath.ru | Мессенджер: MAX</p>
+        <p>&copy; 2026 Мой путь к себе. Все права защищены.</p>
+    </footer>
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>
