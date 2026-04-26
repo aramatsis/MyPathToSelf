@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блог — Мой путь к себе</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: url('images/background9.jpg') center/cover no-repeat;
+            color: #2b2a2a;
+        }
+        main {
+            margin-top: 80px;
+            text-align: center;
+            padding: 20px;
+        }
+        .post {
+            background: #fff;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 800px;
+        }
+        .post h2 {
+            color: #4a4a9e;
+            margin-bottom: 15px;
+        }
+        .post p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .comments {
+            margin-top: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .comments h3 {
+            color: #4a4a9e;
+            margin-bottom: 15px;
+        }
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .comment-form input, .comment-form textarea {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .comment-form button {
+            padding: 10px;
+            background: #4a4a9e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .comment-form button:hover {
+            background: #3a3a7e;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Мой путь к себе</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="meditations.html">Медитации</a></li>
+                <li><a href="blog.html">Блог</a></li>
+                <li><a href="about.html">О сайте</a></li>
+            </ul>
+        </nav>
+        <div class="auth">
+            <a href="login.html">Авторизация</a>
+        </div>
+    </header>
+
+    <main>
+        <h1>Блог</h1>
+        <article class="post">
+            <h2>Правильное дыхание во время медитации</h2>
+            <p>Дыхание — это основа любой медитативной практики. Правильное дыхание помогает успокоить ум, снизить уровень стресса и глубже погрузиться в состояние осознанности.</p>
+            <p>Рекомендуется начинать с простой техники: вдох на счёт 4, задержка дыхания на 4, выдох на 6. Повторяйте этот цикл в течение 5–10 минут ежедневно.</p>
+            <p>Со временем вы почувствуете, как ваше тело и разум становятся более гармоничными. Практикуйте регулярно — и путь к себе станет яснее.</p>
+        </article>
+
+        <section class="comments">
+            <h3>Комментарии</h3>
+            <p>Для добавления комментария <a href="login.html">войдите</a> или <a href="register.html">зарегистрируйтесь</a>.</p>
+            <form class="comment-form">
+                <input type="text" placeholder="Ваше имя" required>
+                <textarea placeholder="Ваш комментарий" rows="5" required></textarea>
+                <button type="submit">Оставить комментарий</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p><a href="index.html">Главная</a> | <a href="meditations.html">Медитации</a> | <a href="videos.html">Видео</a> | <a href="blog.html">Блог</a> | <a href="audio.html">Аудио</a> | <a href="literature.html">Литература</a> | <a href="energygenus.html">Энергия Рода</a> | <a href="about.html">О сайте</a> | <a href="contact.html">Контакты</a></p>
+        <p>Телефон: +7 (XXX) XXX-XX-XX | Email: info@mypath.ru | Мессенджер: MAX</p>
+        <p>&copy; 2026 Мой путь к себе. Все права защищены.</p>
+    </footer>
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>

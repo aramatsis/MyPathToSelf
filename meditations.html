@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Медитации — Мой путь к себе</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: url('images/background2.jpg') center/cover no-repeat;
+            color: #1fbbae;
+        }
+        main {
+            margin-top: 80px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .videos {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+            width: 100%;
+        }
+        .video-item {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .video-item:hover {
+            transform: translateY(-5px);
+        }
+        .video-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .video-item .title {
+            padding: 10px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .audio-section {
+            margin-top: 50px;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+        .audio-section h2 {
+            margin-bottom: 20px;
+            color: #a12cac;
+        }
+        .audio-player {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .audio-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+
+        .audio-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .audio-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .audio-card img {
+            width: 100%;
+            max-width: 120px;
+            border-radius: 8px;
+            margin: 0 auto 10px auto;
+        }
+
+        .audio-card p {
+            margin: 8px 0;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .audio-card audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+       .audio-card .download-btn {
+            margin-top: 8px;
+            padding: 6px 12px;
+            font-size: 0.85em;
+            color: #fff;
+            background-color: #a12cac;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .audio-card .download-btn:hover {
+            background-color: #8a1f91;
+        }
+
+        .audio-card .duration {
+            margin-top: 6px;
+            font-size: 0.85em;
+            color: #777;
+            font-style: italic;
+        } 
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .audio-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .audio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .audio-grid {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Мой путь к себе</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="meditations.html">Медитации</a></li>
+                <li><a href="blog.html">Блог</a></li>
+                <li><a href="about.html">О сайте</a></li>
+            </ul>
+        </nav>
+        <div class="auth" id="auth-link">
+            <a href="login.html">Авторизация</a>
+        </div>
+    </header>
+
+    <main>
+        <h1>Медитации</h1>
+<section class="videos">
+    <div class="video-item">
+        <video controls width="100%" height="180" style="object-fit: cover;" poster="images/key1.jpeg">
+            <source src="video/key1.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <div class="title">Любовь к своему телу</div>
+    </div>
+    <div class="video-item">
+        <video controls width="100%" height="180" style="object-fit: cover;" poster="images/key1.jpeg">
+            <source src="video/key1.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <div class="title">Прощение себя</div>
+    </div>
+    <div class="video-item">
+        <video controls width="100%" height="180" style="object-fit: cover;" poster="images/key1.jpeg">
+            <source src="video/key1.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <div class="title">Прощение других</div>
+    </div>
+    <div class="video-item">
+        <video controls width="100%" height="180" style="object-fit: cover;" poster="images/key1.jpeg">
+            <source src="video/key1.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <div class="title">Смелость</div>
+    </div>
+    <div class="video-item">
+        <video controls width="100%" height="180" style="object-fit: cover;" poster="images/key1.jpeg">
+            <source src="video/key1.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <div class="title">Нейтралитет и Принятие</div>
+    </div>
+    <div class="video-item">
+        <video controls width="100%" height="180" style="object-fit: cover;" poster="images/key1.jpeg">
+            <source src="video/key1.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <div class="title">Благодарность</div>
+    </div>
+    <div class="video-item">
+        <video controls width="100%" height="180" style="object-fit: cover;" poster="images/key1.jpeg">
+            <source src="video/key1.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <div class="title">Празднование</div>
+    </div>
+    <div class="video-item">
+        <video controls width="100%" height="180" style="object-fit: cover;" poster="images/key1.jpeg">
+            <source src="video/key1.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <div class="title">Благоговение</div>
+    </div>
+</section>
+
+       <section class="audio-section">
+            <h2>Аудио для медитаций</h2>
+            <div id="audio-grid" class="audio-grid">
+        <!-- Карточки будут добавлены автоматически -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p><a href="index.html">Главная</a> | <a href="meditations.html">Медитации</a> | <a href="videos.html">Видео</a> | <a href="blog.html">Блог</a> | <a href="audio.html">Аудио</a> | <a href="literature.html">Литература</a> | <a href="energygenus.html">Энергия Рода</a> | <a href="about.html">О сайте</a> | <a href="contact.html">Контакты</a></p>
+        <p>Телефон: +7 (XXX) XXX-XX-XX | Email: info@mypath.ru | Мессенджер: MAX</p>
+        <p>&copy; 2026 Мой путь к себе. Все права защищены.</p>
+    </footer>
+    <script type="module">
+    import { requireAuth } from './js/auth.js';
+    requireAuth();
+    </script>
+    <script type="module" src="js/audio.js"></script>
+</body>
+</html>

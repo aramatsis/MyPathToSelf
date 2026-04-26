@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аудио — Мой путь к себе</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: url('images/background5.jpg') center/cover no-repeat;
+            color: #9d08b1;
+        }
+        main {
+            margin-top: 80px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .audio-list {
+            width: 100%;
+            max-width: 800px;
+            margin: 40px 0;
+        }
+        .audio-item {
+            background: #fff;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+        .audio-item:hover {
+            transform: translateY(-3px);
+        }
+        .audio-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        .audio-info {
+            flex: 1;
+        }
+        .audio-info h3 {
+            margin-bottom: 5px;
+            color: #4a4a9e;
+        }
+        .audio-info p {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .audio-player {
+            margin-top: 20px;
+            width: 100%;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Мой путь к себе</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="meditations.html">Медитации</a></li>
+                <li><a href="blog.html">Блог</a></li>
+                <li><a href="about.html">О сайте</a></li>
+            </ul>
+        </nav>
+        <div class="auth">
+            <a href="login.html">Авторизация</a>
+        </div>
+    </header>
+
+    <main>
+        <h1>Аудио</h1>
+        <section class="audio-list">
+            <div class="audio-item">
+                <img src="https://source.unsplash.com/random/80x80/?sound,relax" alt="Аудио 1">
+                <div class="audio-info">
+                    <h3>Глубокое расслабление</h3>
+                    <p>10-минутная медитация для снятия напряжения.</p>
+                </div>
+                <audio controls style="margin-left: auto;">
+                    <source src="audio/relax1.mp3" type="audio/mpeg">
+                    Ваш браузер не поддерживает аудио.
+                </audio>
+            </div>
+            <div class="audio-item">
+                <img src="https://source.unsplash.com/random/80x80/?sound,meditation" alt="Аудио 2">
+                <div class="audio-info">
+                    <h3>Дыхание жизни</h3>
+                    <p>Практика осознанного дыхания.</p>
+                </div>
+                <audio controls style="margin-left: auto;">
+                    <source src="audio/breath1.mp3" type="audio/mpeg">
+                    Ваш браузер не поддерживает аудио.
+                </audio>
+            </div>
+            <div class="audio-item">
+                <img src="https://source.unsplash.com/random/80x80/?sound,nature" alt="Аудио 3">
+                <div class="audio-info">
+                    <h3>Гармония природы</h3>
+                    <p>Звуки леса и реки для внутреннего равновесия.</p>
+                </div>
+                <audio controls style="margin-left: auto;">
+                    <source src="audio/nature1.mp3" type="audio/mpeg">
+                    Ваш браузер не поддерживает аудио.
+                </audio>
+            </div>
+        </section>
+
+        <section class="audio-player">
+            <h2>Слушать онлайн</h2>
+            <img src="https://source.unsplash.com/random/600x300/?music,sound,waves" alt="Аудио-плеер" style="width: 100%; max-width: 400px; border-radius: 10px; margin-bottom: 15px;">
+            <audio controls style="width: 100%;">
+                <source src="audio/meditation_main.mp3" type="audio/mpeg">
+                Ваш браузер не поддерживает аудио.
+            </audio>
+        </section>
+    </main>
+
+    <footer>
+        <p><a href="index.html">Главная</a> | <a href="meditations.html">Медитации</a> | <a href="videos.html">Видео</a> | <a href="blog.html">Блог</a> | <a href="audio.html">Аудио</a> | <a href="literature.html">Литература</a> | <a href="energygenus.html">Энергия Рода</a> | <a href="about.html">О сайте</a> | <a href="contact.html">Контакты</a></p>
+        <p>Телефон: +7 (XXX) XXX-XX-XX | Email: info@mypath.ru | Мессенджер: MAX</p>
+        <p>&copy; 2026 Мой путь к себе. Все права защищены.</p>
+    </footer>
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>
