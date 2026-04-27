@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "my-path-to-self-12345"
+  },
+  "targets": {
+    "my-path-to-self-12345": {
+      "hosting": {
+        "my-path-to-self": [
+          "default"
+        ]
+      }
+    }
+  }
+}
