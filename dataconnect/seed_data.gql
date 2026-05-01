@@ -1,0 +1,56 @@
+mutation CreateDemoData @transaction @auth(level: USER, insecureReason: "Seed data can be created by any authenticated user for demonstration purposes.") {
+  user1: user_insert(data: {
+    id: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    username: "testuser1",
+    email: "test1@example.com",
+    createdAt: "2023-01-01T10:00:00Z"
+  })
+  user2: user_insert(data: {
+    id: "f6e5d4c3-b2a1-0987-6543-210fedcba987",
+    username: "testuser2",
+    email: "test2@example.com",
+    createdAt: "2023-01-02T11:00:00Z"
+  })
+  goal1: goal_insert(data: {
+    userId: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    title: "Complete Firebase Demo",
+    targetDate: "2023-12-31",
+    createdAt: "2023-01-15T12:00:00Z",
+    description: "Build a full-stack application using Firebase services.",
+    currentProgress: 50,
+    status: "In Progress"
+  })
+  goal2: goal_insert(data: {
+    userId: "f6e5d4c3-b2a1-0987-6543-210fedcba987",
+    title: "Learn GraphQL",
+    targetDate: "2023-11-30",
+    createdAt: "2023-02-01T09:00:00Z",
+    description: "Understand GraphQL queries, mutations, and subscriptions.",
+    currentProgress: 75,
+    status: "In Progress"
+  })
+  journalEntry1: journalEntry_insert(data: {
+    userId: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    entryDate: "2023-03-01",
+    content: "Today was a productive day working on the Firebase project. Made good progress on authentication.",
+    createdAt: "2023-03-01T17:00:00Z",
+    moodRating: 4,
+    isPrivate: false,
+    tags: ["work", "firebase", "progress"]
+  })
+  mood1: mood_insert(data: {
+    userId: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    journalEntryId: "d6e7f8a9-b0c1-2345-6789-012345678901", # Placeholder for journalEntry1's ID
+    moodValue: 4,
+    moodDate: "2023-03-01",
+    createdAt: "2023-03-01T17:30:00Z",
+    notes: "Feeling good about the progress on the app."
+  })
+  goalUpdate1: goalUpdate_insert(data: {
+    goalId: "c1d2e3f4-a5b6-7890-1234-567890abcde0", # Placeholder for goal1's ID
+    updateDate: "2023-04-01",
+    updateNotes: "Completed the authentication module. Moving on to data storage.",
+    createdAt: "2023-04-01T10:00:00Z",
+    progressPercentage: 60
+  })
+}

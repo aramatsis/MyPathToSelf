@@ -1,0 +1,33 @@
+mutation CreateNewUser($username: String!, $createdAt: Timestamp!) @auth(level: NO_ACCESS) {
+  user_insert(data: {username: $username, createdAt: $createdAt}) {
+    id
+  }
+}
+
+mutation AddMoodEntry($moodValue: Int!, $moodDate: Date!) @auth(level: USER) {
+  mood_insert(data: {user: {id_expr: "auth.uid"}, moodValue: $moodValue, moodDate: $moodDate, createdAt_expr: "request.time"}) {
+    id
+  }
+}
+
+query GetUserGoals @auth(level: USER) {
+  goals(where: {user: {id_expr: "auth.uid"}}) {
+    id
+    title
+    targetDate
+    status
+    currentProgress
+  }
+}
+
+query GetPublicJournalEntries @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public as it only retrieves public journal entries.") {
+  journalEntries(where: {isPrivate: {eq: false}}) {
+    id
+    entryDate
+    content
+    moodRating
+    user {
+      username
+    }
+  }
+}

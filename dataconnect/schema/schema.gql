@@ -1,0 +1,44 @@
+type User @table {
+  username: String!
+  createdAt: Timestamp!
+  email: String
+  profilePictureUrl: String
+  lastLogin: Timestamp
+}
+
+type JournalEntry @table {
+  user: User!
+  entryDate: Date!
+  content: String!
+  createdAt: Timestamp!
+  moodRating: Int
+  isPrivate: Boolean
+  tags: [String]
+}
+
+type Mood @table {
+  user: User!
+  journalEntry: JournalEntry
+  moodValue: Int!
+  moodDate: Date!
+  createdAt: Timestamp!
+  notes: String
+}
+
+type Goal @table {
+  user: User!
+  title: String!
+  targetDate: Date!
+  createdAt: Timestamp!
+  description: String
+  currentProgress: Int
+  status: String
+}
+
+type GoalUpdate @table {
+  goal: Goal!
+  updateDate: Date!
+  updateNotes: String!
+  createdAt: Timestamp!
+  progressPercentage: Int
+}
