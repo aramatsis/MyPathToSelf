@@ -3,14 +3,14 @@ name: Deploy to Firebase Hosting
 on:
   push:
     branches:
-      - main  # или master
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install Firebase CLI
