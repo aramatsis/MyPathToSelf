@@ -12,15 +12,14 @@ import {
   getDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// Конфигурация Firebase
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBs9_jRCd1elmS5w_0VF6XqisMRc9te5dg",
-  authDomain: "backtoyourself-eb8e5.firebaseapp.com",
-  projectId: "backtoyourself-eb8e5",
-  storageBucket: "backtoyourself-eb8e5.firebasestorage.app",
-  messagingSenderId: "852375930545",
-  appId: "1:852375930545:web:a02c8925c7e210ebdb0490",
-  measurementId: "G-6LTP00LDY3"
+  apiKey: "AIzaSyDrYTRsm0-T_6r8yQjJ6cNgziNCYNdbtlM",
+  authDomain: "mypathtoself-43707.firebaseapp.com",
+  projectId: "mypathtoself-43707",
+  storageBucket: "mypathtoself-43707.firebasestorage.app",
+  messagingSenderId: "906263821421",
+  appId: "1:906263821421:web:11c829be72e1ad3ddf9364",
 };
 
 // Инициализация
