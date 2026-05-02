@@ -158,8 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });// js/auth.js
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {getAuth,signInWithEmailAndPassword,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import {getFirestore,doc,getDoc} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 // Конфигурация Firebase для вашего веб-приложения
 // Для Firebase JS SDK версии 7.20.0 и более поздних версий параметр measurementId необязателен
@@ -167,15 +167,12 @@ const firebaseConfig = {
   apiKey: "AIzaSyDrYTRsm0-T_6r8yQjJ6cNgziNCYNdbtlM",
   authDomain: "mypathtoself-43707.firebaseapp.com",
   projectId: "mypathtoself-43707",
-  storageBucket: "mypathtoself-43707.firebasestorage.app",
+  storageBucket: "mypathtoself-43707.appspot.com",
   messagingSenderId: "906263821421",
-  appId: "1:906263821421:web:11c829be72e1ad3ddf9364",
+  appId: "1:906263821421:web:11c829be72e1ad3ddf9364"
 };
 
-// Инициализация
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
 
 // === Функция входа ===
 export function loginUser() {
