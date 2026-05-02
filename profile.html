@@ -145,4 +145,151 @@
 }
     </script>
 </body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль — Мой путь к себе</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: url('images/background11.jpg') center/cover no-repeat;
+            color: #2b2a2a;
+        }
+        main {
+            margin-top: 80px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .profile-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .profile-card h2 {
+            color: #4a4a9e;
+            margin-bottom: 20px;
+        }
+        .profile-info {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .profile-info p {
+            margin: 10px 0;
+            font-size: 1em;
+            color: #333;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #4a4a9e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #3a3a7e;
+        }
+        .message {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 0.9em;
+            min-height: 20px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Мой путь к себе</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="meditations.html">Медитации</a></li>
+                <li><a href="blog.html">Блог</a></li>
+                <li><a href="about.html">О сайте</a></li>
+            </ul>
+        </nav>
+        <div class="auth" id="auth-link">
+            <a href="login.html">Авторизация</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="profile-card">
+            <h2>Ваш профиль</h2>
+            <div id="profile-info" class="profile-info">
+                <p><strong>Имя:</strong> <span id="user-name">Загрузка...</span></p>
+                <p><strong>Email:</strong> <span id="user-email">Загрузка...</span></p>
+                <p><strong>Телефон:</strong> <span id="user-phone">—</span></p>
+            </div>
+            <div class="message" id="message"></div>
+            <button class="btn" onclick="window.location.href='index.html'">На главную</button>
+            <button id="logout-btn" class="btn">Выход</button>
+        </div>
+    </main>
+
+    <footer>
+        <p><a href="index.html">Главная</a> | <a href="meditations.html">Медитации</a> | <a href="videos.html">Видео</a> | <a href="blog.html">Блог</a> | <a href="audio.html">Аудио</a> | <a href="literature.html">Литература</a> | <a href="energygenus.html">Энергия Рода</a> | <a href="about.html">О сайте</a> | <a href="contact.html">Контакты</a></p>
+        <p>Телефон: +7 (XXX) XXX-XX-XX | Email: info@mypath.ru | Мессенджер: MAX</p>
+        <p>&copy; 2026 Мой путь к себе. Все права защищены.</p>
+    </footer>
+
+    <!-- Подключаем единый модуль аутентификации -->
+    <script type="module">
+      import { requireAuth, loadProfile, logout } from './js/auth.js';
+
+      // Защита страницы: только для авторизованных
+      requireAuth();
+
+      // Загружаем данные профиля при загрузке DOM
+      document.addEventListener('DOMContentLoaded', loadProfile);
+
+      // Назначаем обработчик выхода
+      const logoutBtn = document.getElementById('logout-btn');
+      if (logoutBtn) {
+        logoutBtn.onclick = logout;
+      }
+
+      export function loadProfile() {
+  const user = getAuth().currentUser;
+  if (!user) return;
+
+  document.getElementById('user-email').textContent = user.email;
+
+  getDoc(doc(db, "users", user.uid))
+    .then((doc) => {
+      if (doc.exists()) {
+        const data = doc.data();
+        document.getElementById('user-name').textContent = data.name || '—';
+        document.getElementById('user-phone').textContent = data.phone || '—';
+      }
+    })
+    .catch((error) => {
+      console.warn("Не удалось загрузить профиль", error);
+      document.getElementById('user-name').textContent = '—';
+      const messageBox = document.getElementById('message');
+      if (messageBox) {
+        messageBox.textContent = "Данные загружаются...";
+        messageBox.className = "message";
+      }
+    });
+}
+    </script>
+</body>
 </html>

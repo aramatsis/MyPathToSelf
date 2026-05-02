@@ -1,0 +1,28 @@
+# Зависимости
+node_modules/
+npm-debug.log*
+yarn-error.log*
+yarn-debug.log*
+
+# Build
+dist/
+build/
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Логи
+logs
+*.log
+
+# Пользовательские данные
+profile.html
+login.html
