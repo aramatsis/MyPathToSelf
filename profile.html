@@ -103,25 +103,27 @@
         <p>&copy; 2026 Мой путь к себе. Все права защищены.</p>
     </footer>
 
-    <!-- Подключаем аутентификацию -->
+    <!-- Скрипт: защита, загрузка профиля, выход -->
     <script type="module">
-  import { requireAuth, loadProfile, logout } from './js/auth.js';
+      import { requireAuth, loadProfile, logout } from './js/auth.js';
 
-  // Защита страницы
-  requireAuth();
+      // Защита: только для авторизованных
+      requireAuth();
 
-  // После загрузки DOM
-  document.addEventListener('DOMContentLoaded', () => {
-    loadProfile();
+      // После полной загрузки DOM
+      document.addEventListener('DOMContentLoaded', () => {
+        loadProfile();
 
-    const logoutBtn = document.getElementById('logout-btn');
-    if (logoutBtn) {
-      logoutBtn.onclick = logout;
-    } else {
-      console.warn("Элемент #logout-btn не найден");
-    }
-  });
-</script>
-            <script type="module" src="js/auth.js"></script>
+        const logoutBtn = document.getElementById('logout-btn');
+        if (logoutBtn) {
+          logoutBtn.onclick = logout;
+        } else {
+          console.warn("Элемент #logout-btn не найден");
+        }
+      });
+    </script>
+
+    <!-- Подключаем общий скрипт (инициализация Firebase) -->
+    <script type="module" src="js/auth.js"></script>
 </body>
 </html>
