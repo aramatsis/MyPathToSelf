@@ -153,32 +153,11 @@
         <p>&copy; 2026 Мой путь к себе. Все права защищены.</p>
     </footer>
 
-        <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    sendEmailVerification
-  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-  import {
-    getFirestore,
-    doc,
-    setDoc
-  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyBs9_jRCd1elmS5w_0VF6XqisMRc9te5dg",
-    authDomain: "backtoyourself-eb8e5.firebaseapp.com",
-    projectId: "backtoyourself-eb8e5",
-    storageBucket: "backtoyourself-eb8e5.firebasestorage.app",
-    messagingSenderId: "852375930545",
-    appId: "1:852375930545:web:a02c8925c7e210ebdb0490",
-    measurementId: "G-6LTP00LDY3"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+<script type="module">
+  import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { auth } from './js/auth.js'; // используем уже инициализированный auth
+  const db = getFirestore(); // используем тот же проект
 
   window.registerUser = function() {
     const name = document.getElementById('name').value.trim();
@@ -229,7 +208,7 @@
 
         document.getElementById('register-form').reset();
 
-        // Через 1.5 секунды — редирект на главную
+        // Через 2.5 секунды — редирект на главную
         setTimeout(() => {
           window.location.href = "index.html";
         }, 2500);
@@ -252,5 +231,7 @@
       });
   };
 </script>
+    <!-- Подключаем общий скрипт -->
+<script type="module" src="js/auth.js"></script>
 </body>
 </html>
