@@ -158,20 +158,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });// js/auth.js
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import {
-  getFirestore,
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {getAuth,signInWithEmailAndPassword,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getFirestore,doc,getDoc} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// Конфигурация Firebase
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Конфигурация Firebase для вашего веб-приложения
+// Для Firebase JS SDK версии 7.20.0 и более поздних версий параметр measurementId необязателен
 const firebaseConfig = {
   apiKey: "AIzaSyDrYTRsm0-T_6r8yQjJ6cNgziNCYNdbtlM",
   authDomain: "mypathtoself-43707.firebaseapp.com",
@@ -179,7 +170,6 @@ const firebaseConfig = {
   storageBucket: "mypathtoself-43707.firebasestorage.app",
   messagingSenderId: "906263821421",
   appId: "1:906263821421:web:11c829be72e1ad3ddf9364",
-  measurementId: "G-ZZ2YY6FMND"
 };
 
 // Инициализация
