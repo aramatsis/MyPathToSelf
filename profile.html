@@ -105,19 +105,22 @@
 
     <!-- Подключаем аутентификацию -->
     <script type="module">
-      import { requireAuth, loadProfile, logout } from './js/auth.js';
+  import { requireAuth, loadProfile, logout } from './js/auth.js';
 
-      // Защита страницы
-      requireAuth();
+  // Защита страницы
+  requireAuth();
 
-      // Загружаем профиль
-      document.addEventListener('DOMContentLoaded', loadProfile);
+  // После загрузки DOM
+  document.addEventListener('DOMContentLoaded', () => {
+    loadProfile();
 
-      // Кнопка выхода
-      const logoutBtn = document.getElementById('logout-btn');
-      if (logoutBtn) {
-        logoutBtn.onclick = logout;
-      }
-    </script>
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+      logoutBtn.onclick = logout;
+    } else {
+      console.warn("Элемент #logout-btn не найден");
+    }
+  });
+</script>
 </body>
 </html>
