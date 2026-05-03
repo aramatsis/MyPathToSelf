@@ -83,47 +83,76 @@
 
     <main>
         <h1>Аудио</h1>
+
         <section class="audio-list">
+            <!-- Аудио 1 -->
             <div class="audio-item">
-                <img src="https://source.unsplash.com/random/80x80/?sound,relax" alt="Аудио 1">
+                <img 
+                    src="images/audio1.jpeg" 
+                    alt="Медитация «Глубокое расслабление — часть 1»" 
+                    width="80" 
+                    height="80"
+                >
                 <div class="audio-info">
-                    <h3>Глубокое расслабление</h3>
+                    <h3>Глубокое расслабление — часть 1</h3>
                     <p>10-минутная медитация для снятия напряжения.</p>
                 </div>
-                <audio controls style="margin-left: auto;">
+                <audio controls preload="metadata">
                     <source src="audio/relax1.mp3" type="audio/mpeg">
                     Ваш браузер не поддерживает аудио.
                 </audio>
             </div>
+
+            <!-- Аудио 2 -->
             <div class="audio-item">
-                <img src="https://source.unsplash.com/random/80x80/?sound,meditation" alt="Аудио 2">
+                <img 
+                    src="images/audio2.jpg" 
+                    alt="Медитация «Глубокое расслабление — часть 2»" 
+                    width="80" 
+                    height="80"
+                >
                 <div class="audio-info">
-                    <h3>Дыхание жизни</h3>
-                    <p>Практика осознанного дыхания.</p>
+                    <h3>Глубокое расслабление — часть 2</h3>
+                    <p>Продолжение практики для полного освобождения от стресса.</p>
                 </div>
-                <audio controls style="margin-left: auto;">
-                    <source src="audio/breath1.mp3" type="audio/mpeg">
+                <audio controls preload="metadata">
+                    <source src="audio/relax2.mp3" type="audio/mpeg">
                     Ваш браузер не поддерживает аудио.
                 </audio>
             </div>
+            
+            <!-- Аудио 3 -->
             <div class="audio-item">
-                <img src="https://source.unsplash.com/random/80x80/?sound,nature" alt="Аудио 3">
+                <img 
+                    src="images/audio3.jpeg" 
+                    alt="Медитация «Глубокое расслабление — часть 3»" 
+                    width="80" 
+                    height="80"
+                >
                 <div class="audio-info">
-                    <h3>Гармония природы</h3>
-                    <p>Звуки леса и реки для внутреннего равновесия.</p>
+                    <h3>Глубокое расслабление — часть 3</h3>
+                    <p>Завершающая медитация цикла для внутреннего покоя.</p>
                 </div>
-                <audio controls style="margin-left: auto;">
-                    <source src="audio/nature1.mp3" type="audio/mpeg">
+                <audio controls preload="metadata">
+                    <source src="audio/relax3.mp3" type="audio/mpeg">
                     Ваш браузер не поддерживает аудио.
                 </audio>
             </div>
         </section>
 
+        <!-- Основной плеер -->
         <section class="audio-player">
             <h2>Слушать онлайн</h2>
-            <img src="https://source.unsplash.com/random/600x300/?music,sound,waves" alt="Аудио-плеер" style="width: 100%; max-width: 400px; border-radius: 10px; margin-bottom: 15px;">
-            <audio controls style="width: 100%;">
-                <source src="audio/meditation_main.mp3" type="audio/mpeg">
+                <img 
+                    src="images/image.jpeg" 
+                    alt="Аудио-плеер — слушайте медитации для расслабления и восстановления" 
+                    width="400" 
+                    height="200"
+                    class="audio-hero-img"
+                    loading="lazy"
+                >
+            <audio controls preload="metadata">
+                <source src="audio/relax1.mp3" type="audio/mpeg">
                 Ваш браузер не поддерживает аудио.
             </audio>
         </section>

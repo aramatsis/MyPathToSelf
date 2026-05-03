@@ -92,3 +92,15 @@ footer a:hover {
     height: auto;
     max-width: 400px;
 }
+
+.audio-item audio {
+    margin-left: auto;
+}
+
+.audio-hero-img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    display: block; /* Убирает лишнее пространство под изображением */
+}
