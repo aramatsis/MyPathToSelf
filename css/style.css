@@ -72,3 +72,9 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
+
+.video-item video {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
