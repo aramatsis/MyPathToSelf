@@ -40,7 +40,7 @@
             transform: translateY(-5px);
         }
         .card img {
-            width: 100%;
+            width: 180px;
             height: 160px;
             object-fit: cover;
         }
@@ -114,13 +114,6 @@
         </p>
         <div id="docs-grid" class="grid"></div>
 
-        <p> 
-          Читаем 10 дней, каждый день новая молитва! </p>
-
-        <div id="docs-grid" class="grid">
-            <!-- Документы будут добавлены автоматически -->
-        </div>
-
     </main>
 
     <footer>
@@ -129,32 +122,43 @@
         <p>&copy; 2026 Мой путь к себе. Все права защищены.</p>
     </footer>
 
-    <!-- Подключаем аутентификацию -->
-    <script type="module" src="js/auth.js"></script>
-
     <!-- Основной скрипт -->
     <script>
         const audioList = [
             {
                 title: "Молитва на защиту",
-                description: "Прослушать перед молитвой.",
+                description: "Прослушать перед каждой молитвой для постановки защиты.",
                 src: "audio/energygenus1.ogg",
                 img: "images/energy1.jpeg",
-                download: "audio/energygenus1.mp3"
+                download: "audio/energygenus1.ogg"
             },
             {
-                title: "Исцеление родовой боли",
-                description: "Работа с негативными программами прошлых поколений.",
-                src: "audio/energygenus2.mp3",
-                img: "images/energy2.jpg",
-                download: "audio/energygenus2.mp3"
+                title: "Практика «Непринятые дети в Роду»",
+                description: "Прослушать перед чтением О нерождённых детях.",
+                src: "audio/energygenus2.ogg",
+                img: "images/energy2.jpeg",
+                download: "audio/energygenus2.ogg"
             },
             {
-                title: "Родовая благодарность",
-                description: "Практика признания и благодарности роду.",
-                src: "audio/energygenus3.mp3",
-                img: "images/energy3.jpg",
+                title: "По поводу не рождённых душ",
+                description: "Принятие осознания О нерождённых детях.",
+                src: "audio/energygenus3.ogg",
+                img: "images/energy3.jpeg",
+                download: "audio/energygenus3.ogg"
+            },
+            {
+                title: "Практика прощения и отпускание обид",
+                description: "Молитва  прощения обид причиненных себе и другим.",
+                src: "audio/energygenus4.mp3",
+                img: "images/energy4.jpeg",
                 download: "audio/energygenus3.mp3"
+            },
+            {
+                title: "Практика исключённых и забытых",
+                description: "Принятие исключённых и забытых из рода.",
+                src: "audio/energygenus5.ogg",
+                img: "images/energy5.jpeg",
+                download: "audio/energygenus5.ogg"
             }
         ];
 
@@ -200,6 +204,36 @@
                 description: "Пятый день.",
                 img: "images/doc5.jpeg",
                 file: "docs/rodoslovnaia5.pdf"
+            },
+            {
+                title: "О воинах рода",
+                description: "Шестой день.",
+                img: "images/doc6.jpeg",
+                file: "docs/rodoslovnaia6.pdf"
+            },
+                        {
+                title: "На очищение всего рода",
+                description: "Седьмой день.",
+                img: "images/doc7.jpeg",
+                file: "docs/rodoslovnaia7.pdf"
+            },
+                        {
+                title: "О не рождённых детях",
+                description: "Восьмой день.",
+                img: "images/doc8.jpeg",
+                file: "docs/rodoslovnaia8.pdf"
+            },
+                        {
+                title: "О мудрости рода",
+                description: "Девятый день.",
+                img: "images/doc9.jpeg",
+                file: "docs/rodoslovnaia9.pdf"
+            },
+                        {
+                title: "Молитва роду",
+                description: "Десятый день.",
+                img: "images/doc10.jpeg",
+                file: "docs/rodoslovnaia10.pdf"
             }
         ];
 
@@ -280,6 +314,11 @@
             loadDocs();
         });
     </script>
-            <script type="module" src="js/auth.js"></script>
+        <script type="module">
+            import { requireAuth } from './js/auth.js';
+            requireAuth();
+    </script>
+        <!-- Подключаем аутентификацию -->
+    <script type="module" src="js/auth.js"></script>
 </body>
 </html>
