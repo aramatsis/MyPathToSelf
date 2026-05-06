@@ -1,12 +1,13 @@
+
 {
   "projects": {
-    "default": "backtoyourself-eb8e5"
+    "default": "mypathtoself-43707"
   },
   "targets": {
-    "backtoyourself-eb8e5": {
+    "mypathtoself-43707": {
       "hosting": {
         "default": [
-          "default"
+          "mypathtoself-43707"
         ]
       }
     }
