@@ -83,3 +83,12 @@ firebase-private-key.json
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
 ~$*
+# Секреты и ключи
+*.json
+!firebase-config.json
+!public/*.json
+
+# Конкретно запрещаем ключи
+*mypathtoself-*.json
+firebase-private-key.json
+service-account-key.json
