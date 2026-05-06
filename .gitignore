@@ -1,28 +1,85 @@
-# Зависимости
+# ========================
+# Файлы и папки, которые НЕ нужно коммитить
+# ========================
+
+# --- Медиафайлы ---
+audio/
+video/
+*.mp3
+*.mp4
+*.wav
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+
+# --- Изображения (если больше 2 МБ) ---
+# Оставьте только маленькие: logo.png, icons/ и т.п.
+# Крупные: background*.jpg, hero*.jpeg — лучше хранить вне Git
+images/*.jpg
+images/*.jpeg
+images/*.png
+# Исключение: мелкие иконки и логотипы можно оставить
+!images/logo.png
+!images/favicon.ico
+!images/icon-*.png
+
+# --- Системные файлы ---
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+ehthumbs_vista.db
+
+# --- Логи и временные файлы ---
+*.log
+logs/
+temp/
+tmp/
+
+# --- Резервные копии ---
+*~
+\#*\#
+*.bak
+*.tmp
+
+# --- Node.js / npm (если будете использовать) ---
 node_modules/
-npm-debug.log*
-yarn-error.log*
-yarn-debug.log*
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+.pnpm-debug.log
 
-# Build
-dist/
-build/
-
-# Environment
-.env
-.env.local
-
-# IDE
-.vscode/
+# --- Среды разработки ---
 .idea/
+.vscode/
 *.swp
 *.swo
-.DS_Store
+.DS_Store?
 
-# Логи
-logs
-*.log
+# --- Конфигурация и секреты ---
+.env
+.env.local
+config.json
+secrets/
+firebase-private-key.json
 
-# Пользовательские данные
-profile.html
-login.html
+# --- Архивы ---
+*.zip
+*.tar
+*.gz
+*.rar
+*.7z
+
+# --- macOS и Windows ---
+.AppleDouble
+.LSOverride
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+~$*
