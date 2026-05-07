@@ -158,6 +158,7 @@
       // Импортируем Firebase Auth и Firestore
       import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
       import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+      import { auth } from './js/auth.js'; // используем уже инициализированный auth
       const db = getFirestore(); // использует тот же проект из auth.js
 
       // Определяем функцию и сразу привязываем к window
