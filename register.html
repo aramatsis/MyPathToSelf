@@ -122,7 +122,7 @@
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" required autocomplete="username">
                 </div>
                 <div class="form-group">
                     <label for="password">Пароль</label>
@@ -155,12 +155,14 @@
 
     <!-- Скрипт регистрации -->
     <script type="module">
+      // Импортируем Firebase Auth и Firestore
       import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
       import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
       import { auth } from './js/auth.js'; // используем уже инициализированный auth
       const db = getFirestore(); // использует тот же проект из auth.js
 
-      window.registerUser = function() {
+      // Определяем функцию и сразу привязываем к window
+      window.registerUser = async function() {
         const name = document.getElementById('name').value.trim();
         const phone = document.getElementById('phone').value.trim();
         const email = document.getElementById('email').value.trim().toLowerCase();
@@ -189,48 +191,50 @@
           return;
         }
 
-        createUserWithEmailAndPassword(auth, email, password)
-          .then(async (userCredential) => {
-            const user = userCredential.user;
+        try {
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          const user = userCredential.user;
 
-            // Сохраняем имя и телефон в Firestore
-            await setDoc(doc(db, "users", user.uid), {
-              name: name,
-              phone: phone,
-              email: email,
-              createdAt: new Date()
-            });
-
-            // Отправляем письмо подтверждения
-            await sendEmailVerification(user);
-
-            messageBox.textContent = `Регистрация успешна! Письмо отправлено на ${email}.`;
-            messageBox.classList.add('success');
-
-            document.getElementById('register-form').reset();
-
-            // Через 2.5 секунды — редирект на главную
-            setTimeout(() => {
-              window.location.href = "index.html";
-            }, 2500);
-          })
-          .catch((error) => {
-            let msg = error.message;
-
-            if (msg.includes('email-already-in-use')) {
-              msg = 'Этот email уже используется.';
-            } else if (msg.includes('invalid-email')) {
-              msg = 'Некорректный email.';
-            } else if (msg.includes('weak-password')) {
-              msg = 'Слабый пароль.';
-            } else {
-              msg = 'Ошибка: ' + msg;
-            }
-
-            messageBox.textContent = msg;
-            messageBox.classList.add('error');
+          // Сохраняем имя и телефон в Firestore
+          await setDoc(doc(db, "users", user.uid), {
+            name: name,
+            phone: phone,
+            email: email,
+            createdAt: new Date()
           });
+
+          // Отправляем письмо подтверждения
+          await sendEmailVerification(user);
+
+          messageBox.textContent = `Регистрация успешна! Письмо отправлено на ${email}.`;
+          messageBox.classList.add('success');
+
+          document.getElementById('register-form').reset();
+
+          // Через 2.5 секунды — редирект на главную
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 2500);
+        } catch (error) {
+          let msg = error.message;
+
+          if (msg.includes('email-already-in-use')) {
+            msg = 'Этот email уже используется.';
+          } else if (msg.includes('invalid-email')) {
+            msg = 'Некорректный email.';
+          } else if (msg.includes('weak-password')) {
+            msg = 'Слабый пароль.';
+          } else {
+            msg = 'Ошибка: ' + msg;
+          }
+
+          messageBox.textContent = msg;
+          messageBox.classList.add('error');
+        }
       };
+
+      // Отладка: проверяем, что функция определена
+      console.log("✅ registerUser привязана к window");
     </script>
 </body>
 </html>
