@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройки — Мой путь к себе</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: url('images/background12.jpg') center/cover no-repeat;
+            color: #2b2a2a;
+        }
+        main {
+            margin-top: 80px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .settings-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        .settings-container h2 {
+            color: #4a4a9e;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 12px;
+            background: #4a4a9e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background: #3a3a7e;
+        }
+        .message {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 0.9em;
+            min-height: 20px;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+        .links {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .links a {
+            color: #4a9eff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Мой путь к себе</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="meditations.html">Медитации</a></li>
+                <li><a href="blog.html">Блог</a></li>
+                <li><a href="about.html">О сайте</a></li>
+            </ul>
+        </nav>
+        <div class="auth" id="auth-link">
+            <!-- Обновится через JS -->
+        </div>
+    </header>
+
+    <main>
+        <div class="settings-container">
+            <h2>Настройки профиля</h2>
+            <div class="message" id="message"></div>
+
+            <form id="settings-form">
+                <div class="form-group">
+                    <label for="name">Имя</label>
+                    <input type="text" id="name" name="name" autocomplete="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" name="phone" autocomplete="tel">
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="saveSettings()">Сохранить изменения</button>
+                </div>
+            </form>
+
+            <div class="links">
+                <a href="profile.html">Назад в профиль</a>
+                <a href="change-password.html">Сменить пароль</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p><a href="index.html">Главная</a> | <a href="meditations.html">Медитации</a> | <a href="videos.html">Видео</a> | <a href="blog.html">Блог</a> | <a href="audio.html">Аудио</a> | <a href="literature.html">Литература</a> | <a href="energygenus.html">Энергия Рода</a> | <a href="about.html">О сайте</a> | <a href="contact.html">Контакты</a></p>
+        <p>Телефон: +7 (XXX) XXX-XX-XX | Email: info@mypath.ru | Мессенджер: MAX</p>
+        <p>&copy; 2026 Мой путь к себе. Все права защищены.</p>
+    </footer>
+
+    <!-- Скрипт настроек -->
+    <script type="module">
+        // Импортируем необходимые модули
+        import { auth, requireAuth } from './js/auth.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { db } from './js/auth.js';
+
+        // Защита страницы
+        requireAuth('login.html');
+
+        // Загрузка данных профиля при загрузке страницы
+        document.addEventListener('DOMContentLoaded', async () => {
+            const authLink = document.getElementById('auth-link');
+            const nameInput = document.getElementById('name');
+            const phoneInput = document.getElementById('phone');
+            const messageBox = document.getElementById('message');
+
+            // Обновление шапки
+            onAuthStateChanged(auth, (user) => {
+                if (user && authLink) {
+                    authLink.innerHTML = '<a href="profile.html">Мой профиль</a>';
+                } else if (authLink) {
+                    authLink.innerHTML = '<a href="login.html">Авторизация</a>';
+                }
+            });
+
+            try {
+                const user = auth.currentUser;
+                if (!user) return;
+
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                if (userDoc.exists()) {
+                    const data = userDoc.data();
+                    nameInput.value = data.name || '';
+                    phoneInput.value = data.phone || '';
+                } else {
+                    messageBox.textContent = 'Данные не найдены.';
+                    messageBox.className = 'message error';
+                }
+            } catch (error) {
+                messageBox.textContent = 'Ошибка загрузки данных.';
+                messageBox.className = 'message error';
+                console.error("Ошибка при загрузке профиля:", error);
+            }
+        });
+
+        // Функция сохранения настроек
+        window.saveSettings = async function () {
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const messageBox = document.getElementById('message');
+            const user = auth.currentUser;
+
+            messageBox.textContent = '';
+            messageBox.className = 'message';
+
+            if (!name) {
+                messageBox.textContent = 'Введите имя.';
+                messageBox.classList.add('error');
+                return;
+            }
+
+            if (!user) {
+                messageBox.textContent = 'Пользователь не авторизован.';
+                messageBox.classList.add('error');
+                return;
+            }
+
+            try {
+                await setDoc(doc(db, "users", user.uid), {
+                    name: name,
+                    phone: phone,
+                    email: user.email,
+                    updatedAt: new Date()
+                }, { merge: true });
+
+                messageBox.textContent = 'Данные успешно обновлены.';
+                messageBox.classList.add('success');
+            } catch (error) {
+                messageBox.textContent = 'Ошибка сохранения: ' + error.message;
+                messageBox.classList.add('error');
+                console.error("Ошибка при сохранении:", error);
+            }
+        };
+    </script>
+</body>
+</html>
