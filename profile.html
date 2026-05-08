@@ -18,52 +18,66 @@
             display: flex;
             justify-content: center;
         }
-        .profile-card {
+        .profile-container {
             background: #fff;
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             width: 100%;
-            max-width: 400px;
-            text-align: center;
+            max-width: 500px;
         }
-        .profile-card h2 {
+        .profile-container h2 {
             color: #4a4a9e;
             margin-bottom: 20px;
+            text-align: center;
         }
         .profile-info {
-            text-align: left;
-            margin-bottom: 20px;
+            margin: 20px 0;
+            line-height: 1.8;
         }
         .profile-info p {
             margin: 10px 0;
-            font-size: 1em;
+        }
+        .profile-info strong {
             color: #333;
         }
-        .btn {
+        .message {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 0.9em;
+            min-height: 20px;
+        }
+        .error {
+            color: red;
+        }
+        .logout-btn {
             display: block;
             width: 100%;
             padding: 12px;
-            background: #4a4a9e;
+            background: #d32f2f;
             color: white;
             border: none;
             border-radius: 5px;
             font-size: 1em;
             font-weight: 600;
             cursor: pointer;
-            margin-top: 10px;
-        }
-        .btn:hover {
-            background: #3a3a7e;
-        }
-        .message {
             text-align: center;
-            margin: 10px 0;
-            font-size: 0.9em;
-            min-height: 20px;
+            margin-top: 20px;
         }
-        .error {
-            color: red;
+        .logout-btn:hover {
+            background: #b71c1c;
+        }
+        .links {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .links a {
+            color: #4a9eff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .links a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -79,21 +93,27 @@
             </ul>
         </nav>
         <div class="auth" id="auth-link">
-            <a href="login.html">Авторизация</a>
+            <!-- Обновится через JS -->
         </div>
     </header>
 
     <main>
-        <div class="profile-card">
+        <div class="profile-container">
             <h2>Ваш профиль</h2>
-            <div id="profile-info" class="profile-info">
-                <p><strong>Имя:</strong> <span id="user-name">Загрузка...</span></p>
-                <p><strong>Email:</strong> <span id="user-email">Загрузка...</span></p>
-                <p><strong>Телефон:</strong> <span id="user-phone">—</span></p>
-            </div>
             <div class="message" id="message"></div>
-            <button class="btn" onclick="window.location.href='index.html'">На главную</button>
-            <button id="logout-btn" class="btn">Выход</button>
+
+            <div class="profile-info">
+                <p><strong>Имя:</strong> <span id="user-name">Загрузка...</span></p>
+                <p><strong>Телефон:</strong> <span id="user-phone">—</span></p>
+                <p><strong>Email:</strong> <span id="user-email">Загрузка...</span></p>
+            </div>
+
+            <button class="logout-btn" onclick="logout()">Выйти</button>
+
+            <div class="links">
+                <a href="index.html">На главную</a>
+                <a href="settings.html">Настройки</a>
+            </div>
         </div>
     </main>
 
@@ -103,24 +123,21 @@
         <p>&copy; 2026 Мой путь к себе. Все права защищены.</p>
     </footer>
 
-    <!-- Скрипт: защита, загрузка профиля, выход -->
+    <!-- Скрипт профиля -->
     <script type="module">
-      import { requireAuth, loadProfile, logout } from './js/auth.js';
+        // Импортируем нужные функции
+        import { requireAuth, loadProfile, logout } from './js/auth.js';
 
-      // Защита: только для авторизованных
-      requireAuth();
+        // Защита страницы: если не авторизован — редирект на login.html
+        requireAuth('login.html');
 
-      // После полной загрузки DOM
-      document.addEventListener('DOMContentLoaded', () => {
-        loadProfile();
+        // Загружаем данные профиля при загрузке страницы
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProfile();
+        });
 
-        const logoutBtn = document.getElementById('logout-btn');
-        if (logoutBtn) {
-          logoutBtn.onclick = logout;
-        } else {
-          console.warn("Элемент #logout-btn не найден");
-        }
-      });
+        // Делаем logout доступной в глобальной области
+        window.logout = logout;
     </script>
 </body>
 </html>

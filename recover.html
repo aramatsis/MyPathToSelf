@@ -133,50 +133,60 @@
     </footer>
 
     <!-- Скрипт восстановления пароля -->
-    <script type="module">
-      // Импортируем Firebase Auth
-      import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-      import { auth } from './js/auth.js'; // используем уже инициализированный auth
 
-      // Определяем функцию и привязываем к window
-      window.sendPasswordReset = function() {
-        const email = document.getElementById('email').value.trim().toLowerCase();
-        const messageBox = document.getElementById('message');
+<script type="module">
+  // Импортируем только auth из общего модуля
+  import { auth } from './js/auth.js';
+  import { sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-        messageBox.textContent = '';
-        messageBox.className = 'message';
+  // Функция отправки ссылки на восстановление пароля
+  window.sendPasswordReset = async function () {
+    const emailInput = document.getElementById('email');
+    const email = emailInput?.value.trim().toLowerCase();
+    const messageBox = document.getElementById('message');
 
-        if (!email) {
-          messageBox.textContent = "Введите email.";
-          messageBox.classList.add('error');
-          return;
-        }
+    // Сброс сообщения
+    messageBox.textContent = '';
+    messageBox.className = 'message';
 
-        sendPasswordResetEmail(auth, email)
-          .then(() => {
-            messageBox.textContent = `Ссылка для восстановления отправлена на ${email}.`;
-            messageBox.classList.add('success');
-            document.getElementById('recover-form').reset();
-          })
-          .catch((error) => {
-            let msg = error.message;
+    // Валидация
+    if (!email) {
+      messageBox.textContent = "Введите email.";
+      messageBox.classList.add('error');
+      return;
+    }
 
-            if (msg.includes('user-not-found')) {
-              msg = 'Пользователь с таким email не найден.';
-            } else if (msg.includes('invalid-email')) {
-              msg = 'Некорректный email.';
-            } else if (msg.includes('too-many-requests')) {
-              msg = 'Слишком много попыток. Попробуйте позже.';
-            } else {
-              msg = 'Ошибка: ' + msg;
-            }
+    try {
+      await sendPasswordResetEmail(auth, email);
+      
+      messageBox.textContent = `Ссылка для восстановления отправлена на ${email}.`;
+      messageBox.classList.add('success');
+      
+      // Очистка формы
+      document.getElementById('recover-form').reset();
 
-            messageBox.textContent = msg;
-            messageBox.classList.add('error');
-          });
-      };
+    } catch (error) {
+      let msg = error.message;
 
-      console.log("✅ sendPasswordReset привязана к window");
-    </script>
+      if (msg.includes('user-not-found')) {
+        msg = 'Пользователь с таким email не найден.';
+      } else if (msg.includes('invalid-email')) {
+        msg = 'Некорректный email.';
+      } else if (msg.includes('too-many-requests')) {
+        msg = 'Слишком много попыток. Попробуйте позже.';
+      } else {
+        msg = 'Ошибка: ' + msg;
+      }
+
+      messageBox.textContent = msg;
+      messageBox.classList.add('error');
+    }
+  };
+
+  // Гарантируем, что DOM загружен
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log("✅ Страница восстановления пароля готова.");
+  });
+</script>
 </body>
 </html>
