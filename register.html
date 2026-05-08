@@ -155,86 +155,154 @@
 
     <!-- Скрипт регистрации -->
     <script type="module">
-      // Импортируем Firebase Auth и Firestore
-      import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-      import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-      import { auth } from './js/auth.js'; // используем уже инициализированный auth
-      const db = getFirestore(); // использует тот же проект из auth.js
+// js/auth.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-      // Определяем функцию и сразу привязываем к window
-      window.registerUser = async function() {
-        const name = document.getElementById('name').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const email = document.getElementById('email').value.trim().toLowerCase();
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirm-password').value;
-        const messageBox = document.getElementById('message');
+// Конфигурация Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyDrYTRsm0-T_6r8yQjJ6cNgziNCYNdbtlM",
+  authDomain: "mypathtoself-43707.firebaseapp.com",
+  projectId: "mypathtoself-43707",
+  storageBucket: "mypathtoself-43707.firebasestorage.app",
+  messagingSenderId: "906263821421",
+  appId: "1:906263821421:web:11c829be72e1ad3ddf9364",
+};
 
-        messageBox.textContent = '';
-        messageBox.className = 'message';
+// Инициализация Firebase
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);        // ✅ Экспортируем auth
+export const db = getFirestore(app);    // ✅ Экспортируем db
 
-        if (!name || !phone || !email || !password) {
-          messageBox.textContent = "Заполните все поля.";
-          messageBox.classList.add('error');
-          return;
-        }
+// === Функция входа ===
+export function loginUser() {
+  const email = document.getElementById('email')?.value.trim().toLowerCase();
+  const password = document.getElementById('password')?.value;
+  const messageBox = document.getElementById('message');
 
-        if (password !== confirmPassword) {
-          messageBox.textContent = "Пароли не совпадают.";
-          messageBox.classList.add('error');
-          return;
-        }
+  if (!messageBox) return;
 
-        if (password.length < 6) {
-          messageBox.textContent = "Пароль должен быть не менее 6 символов.";
-          messageBox.classList.add('error');
-          return;
-        }
+  messageBox.textContent = '';
+  messageBox.className = 'message';
 
-        try {
-          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-          const user = userCredential.user;
+  if (!email || !password) {
+    messageBox.textContent = "Введите email и пароль.";
+    messageBox.classList.add('error');
+    return;
+  }
 
-          // Сохраняем имя и телефон в Firestore
-          await setDoc(doc(db, "users", user.uid), {
-            name: name,
-            phone: phone,
-            email: email,
-            createdAt: new Date()
-          });
+  signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      messageBox.textContent = "Вход успешен! Перенаправление...";
+      messageBox.classList.add('success');
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1000);
+    })
+    .catch((error) => {
+      let msg = error.message;
 
-          // Отправляем письмо подтверждения
-          await sendEmailVerification(user);
+      if (msg.includes('user-not-found') || msg.includes('wrong-password')) {
+        msg = 'Неверный email или пароль.';
+      } else if (msg.includes('invalid-email')) {
+        msg = 'Некорректный email.';
+      } else {
+        msg = 'Ошибка: ' + msg;
+      }
 
-          messageBox.textContent = `Регистрация успешна! Письмо отправлено на ${email}.`;
-          messageBox.classList.add('success');
+      messageBox.textContent = msg;
+      messageBox.classList.add('error');
+    });
+}
 
-          document.getElementById('register-form').reset();
+// === Обновление ссылки в шапке (устойчиво к оффлайн) ===
+function updateAuthLink() {
+  const authLink = document.getElementById('auth-link');
+  if (!authLink) return;
 
-          // Через 2.5 секунды — редирект на главную
-          setTimeout(() => {
-            window.location.href = "index.html";
-          }, 2500);
-        } catch (error) {
-          let msg = error.message;
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      authLink.innerHTML = '<a href="profile.html">Мой профиль</a>';
+    } else {
+      authLink.innerHTML = '<a href="login.html">Авторизация</a>';
+    }
+  });
+}
 
-          if (msg.includes('email-already-in-use')) {
-            msg = 'Этот email уже используется.';
-          } else if (msg.includes('invalid-email')) {
-            msg = 'Некорректный email.';
-          } else if (msg.includes('weak-password')) {
-            msg = 'Слабый пароль.';
-          } else {
-            msg = 'Ошибка: ' + msg;
-          }
+// === Защита страницы ===
+export function requireAuth(redirectUrl = 'login.html') {
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      window.location.href = redirectUrl;
+    }
+  });
+}
 
-          messageBox.textContent = msg;
-          messageBox.classList.add('error');
-        }
-      };
+// === Функция для загрузки профиля ===
+export function loadProfile() {
+  const user = getAuth().currentUser;
+  const messageBox = document.getElementById('message');
 
-      // Отладка: проверяем, что функция определена
-      console.log("✅ registerUser привязана к window");
+  if (!user) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  // Показываем email
+  const emailEl = document.getElementById('user-email');
+  if (emailEl) emailEl.textContent = user.email;
+
+  // Загружаем имя и телефон из Firestore
+  getDoc(doc(db, "users", user.uid))
+    .then((userDoc) => {
+      if (userDoc.exists()) {
+        const data = userDoc.data();
+        const nameEl = document.getElementById('user-name');
+        const phoneEl = document.getElementById('user-phone');
+
+        if (nameEl) nameEl.textContent = data.name || '—';
+        if (phoneEl) phoneEl.textContent = data.phone || '—';
+      } else {
+        console.warn("Документ пользователя не найден в Firestore");
+      }
+    })
+    .catch((error) => {
+      console.error("Ошибка при загрузке профиля:", error);
+      if (messageBox) {
+        messageBox.textContent = "Не удалось загрузить данные.";
+        messageBox.className = "message error";
+      }
+    });
+}
+
+// === Функция выхода ===
+export function logout() {
+  signOut(auth)
+    .then(() => {
+      window.location.href = "index.html";
+    })
+    .catch((error) => {
+      console.error("Ошибка выхода:", error);
+      const messageBox = document.getElementById('message');
+      if (messageBox) {
+        messageBox.textContent = "Ошибка выхода.";
+        messageBox.className = "message error";
+      }
+    });
+}
+
+// Запуск при загрузке DOM
+document.addEventListener('DOMContentLoaded', () => {
+  // Если есть кнопка входа — вешаем обработчик
+  const loginBtn = document.querySelector('button[onclick="loginUser()"]');
+  if (loginBtn) {
+    loginBtn.onclick = loginUser;
+  }
+
+  // Обновляем шапку (если элемент есть)
+  updateAuthLink();
+});
     </script>
 </body>
 </html>
