@@ -50,6 +50,9 @@
         .error {
             color: red;
         }
+        .success {
+            color: green;
+        }
         .logout-btn {
             display: block;
             width: 100%;
@@ -125,18 +128,32 @@
 
     <!-- Скрипт профиля -->
     <script type="module">
-        // Импортируем нужные функции
-        import { requireAuth, loadProfile, logout } from './js/auth.js';
+        // Импортируем нужные функции из общего модуля
+        import { auth, requireAuth, loadProfile, logout } from './js/auth.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-        // Защита страницы: если не авторизован — редирект на login.html
+        // Защита страницы: редирект, если не авторизован
         requireAuth('login.html');
 
-        // Загружаем данные профиля при загрузке страницы
+        // Обновляем шапку при изменении состояния входа
         document.addEventListener('DOMContentLoaded', () => {
+            // Обновление ссылки "Мой профиль" / "Авторизация"
+            const authLink = document.getElementById('auth-link');
+            if (authLink) {
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        authLink.innerHTML = '<a href="profile.html">Мой профиль</a>';
+                    } else {
+                        authLink.innerHTML = '<a href="login.html">Авторизация</a>';
+                    }
+                });
+            }
+
+            // Загружаем данные профиля
             loadProfile();
         });
 
-        // Делаем logout доступной в глобальной области
+        // Делаем logout доступной глобально
         window.logout = logout;
     </script>
 </body>
