@@ -17,9 +17,9 @@ video/
 # --- Изображения (если больше 2 МБ) ---
 # Оставьте только маленькие: logo.png, icons/ и т.п.
 # Крупные: background*.jpg, hero*.jpeg — лучше хранить вне Git
-images/*.jpg
-images/*.jpeg
-images/*.png
+!images/*.jpg
+!images/*.jpeg
+!images/*.png
 # Исключение: мелкие иконки и логотипы можно оставить
 !images/logo.png
 !images/favicon.ico
