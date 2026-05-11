@@ -258,7 +258,7 @@
                 </div>
 
                 <!-- Форма комментирования (скрыта для незалогиненных) -->
-                <form class="comment-form" id="commentForm" style="display: none;">
+                <form class="comment-form" id="commentForm" hidden>
                     <input type="text" placeholder="Ваше имя" required>
                     <textarea placeholder="Ваш комментарий" rows="4" required></textarea>
                     
@@ -364,12 +364,24 @@
         // Здесь можно добавить cookie/session проверку
         // Сейчас форма скрыта — покажем её, если пользователь "залогинен"
         // Например: если есть localStorage.login === 'true'
+        // Показ формы, если пользователь залогинен
         window.onload = () => {
             if (localStorage.getItem('isLoggedIn') === 'true') {
-                document.getElementById('commentForm').style.display = 'block';
-                document.querySelector('.login-prompt').style.display = 'none';
+                document.getElementById('commentForm').hidden = false;
+                document.querySelector('.login-prompt').hidden = true;
             }
         };
+
+            document.getElementById('commentForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Здесь будет отправка данных на сервер
+                alert('Комментарий отправлен!');
+                this.reset();
+                document.getElementById('recordingStatus').textContent = '';
+                // Удалить записанное аудио после отправки
+                const audio = document.querySelector('.record-audio audio');
+                if (audio) audio.remove();
+            });
     </script>
 
         <footer>
