@@ -11,19 +11,91 @@
             font-family: 'Montserrat', sans-serif;
             background: url('images/background9.jpg') center/cover no-repeat;
             color: #2b2a2a;
+            margin: 0;
+            padding: 0;
+            display: flex;
         }
-        main {
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+        .logo {
+            font-weight: 700;
+            color: #4a4a9e;
+            font-size: 1.4em;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #4a4a9e;
+            font-weight: 600;
+        }
+        .auth a {
+            color: #4a4a9e;
+            font-weight: 600;
+        }
+
+        /* Основной макет */
+        .container {
+            display: flex;
             margin-top: 80px;
-            text-align: center;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Левая колонка — темы */
+        .topics {
+            width: 250px;
+            background: rgba(255, 255, 255, 0.9);
             padding: 20px;
+            overflow-y: auto;
+            height: calc(100vh - 80px);
+            position: fixed;
+            left: 0;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+        }
+        .topics h3 {
+            color: #4a4a9e;
+            margin-bottom: 15px;
+        }
+        .topic-item {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #f0f0ff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .topic-item:hover, .topic-item.active {
+            background: #d0d0ff;
+        }
+
+        /* Центр — контент темы */
+        .content {
+            margin-left: 280px;
+            margin-right: 280px;
+            padding: 30px;
+            flex: 1;
+            max-width: 800px;
         }
         .post {
             background: #fff;
-            margin: 30px auto;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            max-width: 800px;
+            margin-bottom: 30px;
         }
         .post h2 {
             color: #4a4a9e;
@@ -33,17 +105,31 @@
             line-height: 1.8;
             margin-bottom: 15px;
         }
+
         .comments {
             margin-top: 40px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
         }
-        .comments h3 {
-            color: #4a4a9e;
+        .comment {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
             margin-bottom: 15px;
+            border-left: 4px solid #4a4a9e;
         }
+        .comment .author {
+            font-weight: 600;
+            color: #4a4a9e;
+        }
+        .audio-comment {
+            margin-top: 10px;
+        }
+        .audio-comment audio {
+            width: 100%;
+            margin-top: 5px;
+        }
+
         .comment-form {
+            margin-top: 20px;
             display: flex;
             flex-direction: column;
         }
@@ -52,6 +138,20 @@
             margin-bottom: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
+        }
+        .record-audio {
+            margin: 15px 0;
+        }
+        .record-audio button {
+            padding: 10px;
+            background: #5a5aaf;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .record-audio button.recording {
+            background: #d32f2f;
         }
         .comment-form button {
             padding: 10px;
@@ -62,8 +162,41 @@
             cursor: pointer;
             font-weight: 600;
         }
-        .comment-form button:hover {
-            background: #3a3a7e;
+
+        /* Правая колонка — админ-сообщения */
+        .admin-panel {
+            width: 250px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            position: fixed;
+            right: 0;
+            top: 80px;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.05);
+        }
+        .admin-panel h3 {
+            color: #4a4a9e;
+            margin-bottom: 15px;
+        }
+        .admin-message {
+            background: #eef2ff;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .login-prompt {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        .login-prompt a {
+            color: #4a4a9e;
+            font-weight: 600;
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -83,29 +216,165 @@
         </div>
     </header>
 
-    <main>
-        <h1>Блог</h1>
-        <article class="post">
-            <h2>Правильное дыхание во время медитации</h2>
-            <p>Дыхание — это основа любой медитативной практики. Правильное дыхание помогает успокоить ум, снизить уровень стресса и глубже погрузиться в состояние осознанности.</p>
-            <p>Рекомендуется начинать с простой техники: вдох на счёт 4, задержка дыхания на 4, выдох на 6. Повторяйте этот цикл в течение 5–10 минут ежедневно.</p>
-            <p>Со временем вы почувствуете, как ваше тело и разум становятся более гармоничными. Практикуйте регулярно — и путь к себе станет яснее.</p>
-        </article>
+    <div class="container">
+        <!-- Левая колонка: Темы -->
+        <aside class="topics">
+            <h3>Темы обсуждений</h3>
+            <div class="topic-item active" onclick="loadTopic(1)">Правильное дыхание во время медитации</div>
+            <div class="topic-item" onclick="loadTopic(2)">Осознанность в повседневной жизни</div>
+            <div class="topic-item" onclick="loadTopic(3)">Как справиться с тревожностью</div>
+            <!-- Другие темы будут добавлены через JS или сервер -->
+        </aside>
 
-        <section class="comments">
-            <h3>Комментарии</h3>
-            <p>Для добавления комментария <a href="login.html">войдите</a> или <a href="register.html">зарегистрируйтесь</a>.</p>
-            <form class="comment-form">
-                <input type="text" placeholder="Ваше имя" required>
-                <textarea placeholder="Ваш комментарий" rows="5" required></textarea>
-                <button type="submit">Оставить комментарий</button>
-            </form>
-        </section>
-    </main>
+        <!-- Центр: Контент темы и комментарии -->
+        <main class="content">
+            <article id="topic-content" class="post">
+                <h2>Правильное дыхание во время медитации</h2>
+                <p>Дыхание — это основа любой медитативной практики. Правильное дыхание помогает успокоить ум, снизить уровень стресса и глубже погрузиться в состояние осознанности.</p>
+                <p>Рекомендуется начинать с простой техники: вдох на счёт 4, задержка дыхания на 4, выдох на 6. Повторяйте этот цикл в течение 5–10 минут ежедневно.</p>
+                <p>Со временем вы почувствуете, как ваше тело и разум становятся более гармоничными. Практикуйте регулярно — и путь к себе станет яснее.</p>
+            </article>
 
-    <footer>
+            <section class="comments">
+                <h3>Комментарии</h3>
+                <div class="login-prompt">
+                    Для добавления комментария <a href="login.html">войдите</a> или <a href="register.html">зарегистрируйтесь</a>.
+                </div>
+
+                <!-- Пример комментариев -->
+                <div class="comment">
+                    <div class="author">Анна</div>
+                    <div class="text">Отличная статья! Помогла мне настроиться на медитацию.</div>
+                </div>
+                <div class="comment">
+                    <div class="author">Игорь</div>
+                    <div class="text">Попробовал технику — действительно работает!</div>
+                    <div class="audio-comment">
+                        <audio controls>
+                            <source src="audio/comment_igor.mp3" type="audio/mpeg">
+                            Ваш браузер не поддерживает аудио.
+                        </audio>
+                    </div>
+                </div>
+
+                <!-- Форма комментирования (скрыта для незалогиненных) -->
+                <form class="comment-form" id="commentForm" style="display: none;">
+                    <input type="text" placeholder="Ваше имя" required>
+                    <textarea placeholder="Ваш комментарий" rows="4" required></textarea>
+                    
+                    <div class="record-audio">
+                        <button type="button" id="recordBtn">Записать аудио</button>
+                        <span id="recordingStatus"></span>
+                    </div>
+                    
+                    <button type="submit">Оставить комментарий</button>
+                </form>
+            </section>
+        </main>
+
+        <!-- Правая колонка: Админ-панель -->
+        <aside class="admin-panel">
+            <h3>Сообщения администратора</h3>
+            <div class="admin-message">
+                Добро пожаловать в блог! Здесь мы растём вместе.
+            </div>
+            <div class="admin-message">
+                Новая медитация уже доступна в разделе "Медитации".
+            </div>
+            <div class="admin-message">
+                Следующая вебинар-встреча состоится в субботу в 19:00.
+            </div>
+            <div class="admin-message">
+                Благодарю всех за активное участие в обсуждениях!
+            </div>
+        </aside>
+    </div>
+
+    <!-- JavaScript для аудиозаписи и переключения тем -->
+    <script>
+        // Переключение тем (упрощённо)
+        function loadTopic(id) {
+            document.querySelectorAll('.topic-item').forEach(el => el.classList.remove('active'));
+            document.querySelector(`.topic-item:nth-child(${id})`).classList.add('active');
+
+            // Здесь будет загрузка данных с сервера (AJAX), сейчас просто заглушка
+            const topics = {
+                1: {
+                    title: "Правильное дыхание во время медитации",
+                    content: `<p>Дыхание — это основа любой медитативной практики...</p>`
+                },
+                2: {
+                    title: "Осознанность в повседневной жизни",
+                    content: `<p>Осознанность — это не только про медитации, но и про каждый момент жизни...</p>`
+                },
+                3: {
+                    title: "Как справиться с тревожностью",
+                    content: `<p>Тревожность — частый спутник современного человека...</p>`
+                }
+            };
+
+            const topic = topics[id];
+            document.getElementById('topic-content').innerHTML = `<h2>${topic.title}</h2>${topic.content}`;
+        }
+
+        // Аудиозапись
+        let mediaRecorder;
+        let audioChunks = [];
+        const recordBtn = document.getElementById('recordBtn');
+        const recordingStatus = document.getElementById('recordingStatus');
+        const commentForm = document.getElementById('commentForm');
+
+        recordBtn.addEventListener('click', async () => {
+            if (recordBtn.textContent === 'Записать аудио') {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+
+                    mediaRecorder.ondataavailable = event => {
+                        audioChunks.push(event.data);
+                    };
+
+                    mediaRecorder.onstop = () => {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/mpeg' });
+                        const audioUrl = URL.createObjectURL(audioBlob);
+                        const audio = document.createElement('audio');
+                        audio.controls = true;
+                        audio.src = audioUrl;
+                        document.querySelector('.record-audio').appendChild(audio);
+                    };
+
+                    mediaRecorder.start();
+                    recordBtn.textContent = 'Остановить запись';
+                    recordBtn.classList.add('recording');
+                    recordingStatus.textContent = 'Идёт запись...';
+                } catch (err) {
+                    alert('Ошибка доступа к микрофону: ' + err.message);
+                }
+            } else {
+                mediaRecorder.stop();
+                recordBtn.textContent = 'Записать аудио';
+                recordBtn.classList.remove('recording');
+                recordingStatus.textContent = '';
+            }
+        });
+
+        // Показ формы только при логине (имитация)
+        // В реальности проверка будет на сервере
+        // Здесь можно добавить cookie/session проверку
+        // Сейчас форма скрыта — покажем её, если пользователь "залогинен"
+        // Например: если есть localStorage.login === 'true'
+        window.onload = () => {
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                document.getElementById('commentForm').style.display = 'block';
+                document.querySelector('.login-prompt').style.display = 'none';
+            }
+        };
+    </script>
+
+        <footer>
         <p><a href="index.html">Главная</a> | <a href="meditations.html">Медитации</a> | <a href="symphony.html">Симфония</a> | <a href="blog.html">Блог</a> | <a href="audio.html">Для души</a> | <a href="literature.html">Литература</a> | <a href="energygenus.html">Энергия Рода</a> | <a href="about.html">О сайте</a> | <a href="contact.html">Контакты</a></p>
-        <p>Телефон: +7 (XXX) XXX-XX-XX | Email: info@mypath.ru | Мессенджер: MAX</p>
+        <p>Телефон: +7 (987) 654-00-00 | Email: info@mypath.ru | Мессенджер: MAX</p>
         <p>&copy; 2026 Мой путь к себе. Все права защищены.</p>
     </footer>
 </body>
