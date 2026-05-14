@@ -1,25 +1,4 @@
-// js/auth.js
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {getAuth,signInWithEmailAndPassword,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import {getFirestore,doc,getDoc} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDrYTRsm0-T_6r8yQjJ6cNgziNCYNdbtlM",
-  authDomain: "mypathtoself-43707.firebaseapp.com",
-  projectId: "mypathtoself-43707",
-  storageBucket: "mypathtoself-43707.firebasestorage.app",
-  messagingSenderId: "906263821421",
-  appId: "1:906263821421:web:11c829be72e1ad3ddf9364",
-};
-
-// После инициализации приложения
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);        // <-- добавлен export
-export const db = getFirestore(app);    // <-- опционально, но полезно
-
-// === Функция входа ===
+  // <-- опционально, но полезно// === Функция входа ===
 export function loginUser() {
   const email = document.getElementById('email')?.value.trim().toLowerCase();
   const password = document.getElementById('password')?.value;
