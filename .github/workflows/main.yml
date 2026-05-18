@@ -19,10 +19,4 @@ jobs:
         with:
           node-version: '18'
 
-      # 3. Устанавливаем Firebase CLI
-      - name: Install Firebase CLI
-        run: npm install -g firebase-tools
 
-      # 4. Деплоим на Firebase Hosting
-      - name: Deploy to Firebase
-        run: firebase deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }}
